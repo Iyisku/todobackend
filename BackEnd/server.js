@@ -6,6 +6,7 @@ const cors = require('cors');
 const app = express(); 
 const todoRoutes = require('./Routes/todoRoutes');
 const authRoutes = require('./Routes/authRoutes');
+const { createServer } = require('@vercel/node'); // Needed for Vercel compatibility
 
 // .env configurations
 dotenv.config();
@@ -30,8 +31,10 @@ mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
     console.log('Connected to MongoDB');
-    app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+    // app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
   })
   .catch((err) => {
     console.error('Connection error:', err.message);
   });
+
+  module.exports = createServer(app);
