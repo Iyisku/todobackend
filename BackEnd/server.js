@@ -37,3 +37,4 @@ mongoose
     console.error('Connection error:', err.message);
   });
 
+module.exports = app; 
